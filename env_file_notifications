@@ -1,0 +1,11 @@
+DATABASE_URL=jdbc:postgresql://postgres-cicd:5432/notification
+DATABASE_USERNAME=postgres
+DATABASE_PASSWORD=changeit
+
+# rabbitmq
+RMQ_HOST=solvit-rabbitmq
+RMQ_PORT=5672
+RMQ_USER=solvit
+RMQ_PASS=changeit
+RMQ_QUEUE=notificationqueue
+

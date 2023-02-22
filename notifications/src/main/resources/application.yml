@@ -1,0 +1,28 @@
+spring:
+  debug: true
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+      show-sql: true
+      hibernate:
+          format_sql: true
+          ddl-auto: update
+  main:
+    allow-bean-definition-overriding: true
+  rabbitmq:
+    queue: ${RMQ_QUEUE}
+    host: ${RMQ_HOST}
+    username: ${RMQ_USER}
+    password: ${RMQ_PASS}
+    port: ${RMQ_PORT}
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+
+
