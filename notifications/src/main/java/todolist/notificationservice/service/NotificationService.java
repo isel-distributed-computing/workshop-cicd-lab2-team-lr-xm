@@ -74,7 +74,6 @@ public class NotificationService //{
         factory.setHost(HOST);
 
         //connect with failsafe policy
-        Failsafe.with(retryPolicy).run( () -> factory.newConnection() );
         Connection connection = Failsafe.with(retryPolicy).get( () -> factory.newConnection() );
 
 
