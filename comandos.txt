@@ -1,0 +1,6 @@
+docker run -d --hostname solvit-cicd-rabbit --name solvit-rabbitmq --network todo-network -p 127.0.0.1:5672:5672 -p 127.0.0.1:15672:15672 rabbitmq:3-management
+
+java -jar ./notifications/target/todolist-phase2-notifications-1.0.0.jar --spring.rabbitmq.queue=notificationqueue --spring.rabbitmq.host=localhost --spring.rabbitmq.username=guest --spring.rabbitmq.password=guest --spring.rabbitmq.port=5672 --spring.datasource.url=jdbc:postgresql://localhost:5555/postgres --spring.datasource.username=postgres --spring.datasource.password=changeit
+
+docker run --name postgres-cicd -e POSTGRES_PASSWORD=changeit -d -p 5555:5432 postgres
+

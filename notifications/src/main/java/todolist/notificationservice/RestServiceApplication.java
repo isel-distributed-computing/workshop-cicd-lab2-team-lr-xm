@@ -7,10 +7,12 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-//@SpringBootApplication //TODO
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
-@ComponentScan(basePackages = "todolist.*")
+@SpringBootApplication
+//@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@EnableJpaRepositories(basePackages = {"todolist.notificationservice.repository"})
+@ComponentScan(basePackages = {"todolist.notificationservice"})
 public class RestServiceApplication {
 
     public static void main(String[] args) {

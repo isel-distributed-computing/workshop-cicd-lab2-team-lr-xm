@@ -33,8 +33,8 @@ public class NotificationService //{
     @Value("${spring.rabbitmq.password}")
     private String PASSWORD;
 
-
-    //private EventRepository eventRepository;
+    @Autowired
+    private EventRepository eventRepository;
 
     /*
     Autowired used for demonstrations purposes.
@@ -46,8 +46,7 @@ public class NotificationService //{
 
     private void logDB(EventModel evt)
     {        
-        // Save event in database
-        //TODO
+        eventRepository.save(evt);
     }
     private void notify(EventModel evt)
     {
