@@ -63,15 +63,19 @@ public class NotificationService //{
         logger.info(String.format("Trying to connect to %s",HOST));
 
         //Setting resilient connection on missing resources
-        // TODO
+        RetryPolicy<Object> retryPolicy = RetryPolicy.builder()
+                .handle(Exception.class)
+                .withDelay(Duration.ofSeconds(1))
+                .withMaxRetries(3)
+                .build();
 
         //creating connection to RabbitMQ
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(HOST);
 
         //connect with failsafe policy
-        // TODO - Change this line to be resilient
-        Connection connection = factory.newConnection();
+        Failsafe.with(retryPolicy).run( () -> factory.newConnection() );
+        Connection connection = Failsafe.with(retryPolicy).get( () -> factory.newConnection() );
 
 
         //create channel and queue
