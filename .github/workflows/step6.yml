@@ -22,15 +22,15 @@ jobs:
     - name: Build Auth Service with Maven
       run: |
         cd authusers
-        mvn -B package -Dmaven.test.skip=true
+        mvn -B package
       
     - name: Build ToDoList Service with Maven
       run: |
         cd todolist
-        mvn -B package -Dmaven.test.skip=true
+        mvn -B package
         
     - name: Build Notifications Service with Maven
       run: |
         cd notifications
-        mvn -B package -Dmaven.test.skip=true
+        mvn -B package
         
