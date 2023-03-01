@@ -21,16 +21,16 @@ jobs:
  
     - name: Build Auth Service with Maven
       run: |
-        cd phase-2/authusers
+        cd authusers
         mvn -B package -Dmaven.test.skip=true
       
     - name: Build ToDoList Service with Maven
       run: |
-        cd phase-2/todolist
+        cd todolist
         mvn -B package -Dmaven.test.skip=true
         
     - name: Build Notifications Service with Maven
       run: |
-        cd phase-2/notifications
+        cd notifications
         mvn -B package -Dmaven.test.skip=true
         
