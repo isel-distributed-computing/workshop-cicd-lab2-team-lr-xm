@@ -1,5 +1,9 @@
 name: Hello world
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  schedule:
+        - cron: '10 * * * *'
+
 
 jobs:
   # the id of the name
