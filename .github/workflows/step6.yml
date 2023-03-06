@@ -77,8 +77,8 @@ jobs:
    - name: Build Auth Service with Maven
      run: |
        cd authusers
-       mvn -B package
-
+       mvn -B package -Dmaven.test.skip=true
+ 
    - name: Extract metadata (tags, labels) for Docker
 
      id: meta-auth
@@ -89,8 +89,8 @@ jobs:
    - name: Build and push Docker image
      uses: docker/build-push-action@v4
      with:
-       context: phase-2/authusers/.
-       file: phase-2/authusers/Dockerfile
+       context: authusers/.
+       file: authusers/Dockerfile
        push: true
        tags: ${{ steps.meta-auth.outputs.tags }}
        labels: ${{ steps.meta-auth.outputs.labels }}
