@@ -54,7 +54,7 @@ services:
       JWT_SECRET: ${JWT_SECRET}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/swagger-ui/index.html"]
-  todolist_cicd: #todo service
+  todolist-cicd: #todo service
     image: todolist
     depends_on:
         postgres-cicd:
@@ -64,7 +64,7 @@ services:
         authuser-cicd:
           condition: service_healthy
     restart: always
-    container_name: todolist_cicd
+    container_name: todolist-cicd
     ports:
       - 127.0.0.1:8082:8080
     environment:
@@ -77,3 +77,24 @@ services:
       RMQ_PASS: ${RMQ_PASS}
       RMQ_PORT: ${RMQ_PORT}
       AUTH_SERVICE_URL: http://authuser-cicd:8080/
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/swagger-ui/index.html" ]
+  postman:
+    image: postman/newman:alpine
+    container_name: postmanTests
+    command:
+      run CI-CD-MICROSERVICES.postman_collection.json -k
+      -r cli,json,junit
+      --reporter-json-export="reports/CI-CD-MICROSERVICES-tests.json"
+      --reporter-junit-export="reports/CI-CD-MICROSERVICES-tests.xml"
+    volumes:
+      - ./tests:/etc/newman
+    depends_on:
+      authuser-cicd:
+        condition: service_healthy
+      todolist-cicd:
+        condition: service_healthy
+      notification-cicd:
+        condition: service_started
+      rabbit-cicd:
+        condition: service_started

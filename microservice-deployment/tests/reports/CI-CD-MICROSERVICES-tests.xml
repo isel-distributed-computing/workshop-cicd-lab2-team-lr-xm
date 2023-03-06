@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="formação-ci/cd" tests="4" time="0.745">
+  <testsuite name="01 - Criar utilizador" id="db833541-cd79-430b-a3ae-91e89780e38e" timestamp="2023-03-06T13:10:49.101Z" tests="0" failures="0" errors="0" time="0.296"/>
+  <testsuite name="02 - Login" id="7d4fbacc-f1b8-4b2c-88ba-9e2fe1a3d52d" timestamp="2023-03-06T13:10:49.101Z" tests="3" failures="0" errors="0" time="0.090">
+    <testcase name="Status code is 200" time="0.090" classname="FormacaoCiCd"/>
+    <testcase name="Content-Type header is text/plain" time="0.090" classname="FormacaoCiCd"/>
+    <testcase name="Response time is less than 500ms" time="0.090" classname="FormacaoCiCd"/>
+  </testsuite>
+  <testsuite name="03 - TodoList" id="e46f13c7-7aca-4a07-9af5-a4672a8f56bf" timestamp="2023-03-06T13:10:49.101Z" tests="0" failures="0" errors="0" time="0.349"/>
+  <testsuite name="05 - RABBITMQ - Check existing message" id="de153dfd-ac26-4cdb-99aa-1b88f6ce5fbe" timestamp="2023-03-06T13:10:49.101Z" tests="3" failures="0" errors="0" time="0.010">
+    <testcase name="Status code is 200" time="0.010" classname="FormacaoCiCd"/>
+    <testcase name="Queues status" time="0.010" classname="FormacaoCiCd"/>
+    <testcase name="The notification_response queue contains exactly 1 message" time="0.010" classname="FormacaoCiCd"/>
+  </testsuite>
+</testsuites>
