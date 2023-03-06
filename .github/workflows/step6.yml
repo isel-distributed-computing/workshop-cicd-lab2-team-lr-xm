@@ -51,7 +51,7 @@ jobs:
    env:
     JWT_SECRET:  ${{ secrets.JWT_SECRET }}
     
-   runs-on: [self-hosted, ubuntu-latest]
+   runs-on: ubuntu-latest
  
    needs: 
       build-services
@@ -99,7 +99,7 @@ jobs:
      env:
       JWT_SECRET:  ${{ secrets.JWT_SECRET }}
 
-     runs-on: [self-hosted, ubuntu-latest]
+     runs-on: ubuntu-latest
 
      needs: 
         build-services
@@ -147,7 +147,7 @@ jobs:
      env:
       JWT_SECRET:  ${{ secrets.JWT_SECRET }}
 
-     runs-on: [self-hosted, ubuntu-latest]
+     runs-on: ubuntu-latest
 
      needs: 
         build-services
