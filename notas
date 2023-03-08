@@ -1,0 +1,10 @@
+username: luisribeiro password: egq57gMyxjfDgA site: registry.solvit.pt projeto: formacao-solvit5
+
+docker tag authuser:latest registry.solvit.pt/formacao-solvit5/authuser:latest
+docker image push registry.solvit.pt/formacao-solvit5/authuser:latest
+
+docker tag notifications:latest registry.solvit.pt/formacao-solvit5/notifications:latest
+docker image push registry.solvit.pt/formacao-solvit5/notifications:latest
+
+docker tag todolist:latest registry.solvit.pt/formacao-solvit5/todolist:latest
+docker image push registry.solvit.pt/formacao-solvit5/todolist:latest
