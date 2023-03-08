@@ -214,7 +214,7 @@ jobs:
     # Build Java package
     - name: build auth phase-3
       run: |
-        cd phase-3/authusers
+        cd authusers
         mvn -B package -Dmaven.test.skip=true
     # Perform analysis
     - name: Perform CodeQL Analysis
@@ -224,7 +224,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: authuser-jar
-        path: phase-3/authusers/target/authuser-phase2-1.0.0.jar
+        path: authusers/target/authuser-phase2-1.0.0.jar
         if-no-files-found: error
 
 
@@ -238,8 +238,8 @@ jobs:
             name: authuser-jar
         - name: Copy JAR to target (to match Dockerfile)
           run: |
-            mkdir phase-3/authusers/target
-            cp authuser-phase2-1.0.0.jar phase-3/authusers/target/
+            mkdir authusers/target
+            cp authuser-phase2-1.0.0.jar authusers/target/
         - name: Log in to the Container registry
           uses: docker/login-action@v2
           with:
@@ -255,8 +255,8 @@ jobs:
         - name: Build and push Docker image
           uses: docker/build-push-action@v4
           with:
-            context: phase-3/authusers/.
-            file: phase-3/authusers/Dockerfile
+            context: authusers/.
+            file: authusers/Dockerfile
             push: true
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
