@@ -226,3 +226,37 @@ jobs:
         name: authuser-jar
         path: phase-3/authusers/target/authuser-phase2-1.0.0.jar
         if-no-files-found: error
+
+
+  publish-docker-auth:
+      needs: build-scan-authuser
+      runs-on: self-hosted
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/download-artifact@v3
+          with:
+            name: authuser-jar
+        - name: Copy JAR to target (to match Dockerfile)
+          run: |
+            mkdir phase-3/authusers/target
+            cp authuser-phase2-1.0.0.jar phase-3/authusers/target/
+        - name: Log in to the Container registry
+          uses: docker/login-action@v2
+          with:
+            registry: ${{ env.REGISTRY }}
+            username: ${{ secrets.HARBOR_USER_NAME }}
+            password: ${{ secrets.HARBOR_USER_PWD }}
+        - name: Extract metadata (tags, labels) for Docker
+          id: meta
+          uses: docker/metadata-action@v4
+          with:
+            images: ${{ env.REGISTRY }}/solvit-cicd/authusers
+
+        - name: Build and push Docker image
+          uses: docker/build-push-action@v4
+          with:
+            context: phase-3/authusers/.
+            file: phase-3/authusers/Dockerfile
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
