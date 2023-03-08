@@ -191,3 +191,38 @@ jobs:
          tags: ${{ steps.meta-auth.outputs.tags }}
          labels: ${{ steps.meta-auth.outputs.labels }}
 
+  build-scan-authuser:
+    name: Build and scan Authuser service
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Setup Java 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu' 
+        java-version: '17'
+        cache: maven
+
+    # Initializes the CodeQL tools for scanning.
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+       languages: 'java'
+    # Build Java package
+    - name: build auth phase-3
+      run: |
+        cd phase-3/authusers
+        mvn -B package -Dmaven.test.skip=true
+    # Perform analysis
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+    # Upload artifacts for next job
+    - uses: actions/upload-artifact@v3
+      with:
+        name: authuser-jar
+        path: phase-3/authusers/target/authuser-phase2-1.0.0.jar
+        if-no-files-found: error
