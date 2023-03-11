@@ -1,8 +1,6 @@
 name: Hello world - Step 12
 on: 
-  workflow_dispatch:
-  schedule:
-        - cron: '*/10 * * * *'
+  workflow_dispatch
 
 
 jobs:
